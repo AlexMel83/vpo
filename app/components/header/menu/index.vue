@@ -1,6 +1,23 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
+import { tr } from "@nuxt/ui/runtime/locale/index.js";
 const { t } = useI18n();
+
+// Reactive orientation based on screen size
+const isMobile = ref(false);
+
+const updateOrientation = () => {
+  isMobile.value = window.innerWidth < 768; // Tailwind's 'md' breakpoint (768px)
+};
+
+onMounted(() => {
+  updateOrientation();
+  window.addEventListener("resize", updateOrientation);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", updateOrientation);
+});
 
 const items = computed<NavigationMenuItem[][]>(() => [
   [
@@ -8,13 +25,14 @@ const items = computed<NavigationMenuItem[][]>(() => [
       label: t("header.menu.home"),
       icon: "i-lucide-house",
       description: "Home page",
-      // active: true,
       children: [],
+      to: "/",
     },
     {
       label: t("header.menu.about"),
       icon: "i-lucide-book-open",
       description: "About us",
+      to: "/",
       children: [
         {
           label: t("header.menu.team"),
@@ -52,7 +70,6 @@ const items = computed<NavigationMenuItem[][]>(() => [
       label: t("header.menu.resources"),
       icon: "i-lucide-box",
       to: "/",
-      // target: "_blank",
       children: [
         {
           label: t("header.menu.housing"),
@@ -63,7 +80,6 @@ const items = computed<NavigationMenuItem[][]>(() => [
         {
           label: t("header.menu.employment"),
           icon: "i-lucide-pickaxe",
-          description: "Display a modal/slideover within your application.",
           to: "/",
         },
         {
@@ -81,12 +97,15 @@ const items = computed<NavigationMenuItem[][]>(() => [
 <template>
   <UNavigationMenu
     highlight
-    color="primary"
     highlight-color="primary"
-    orientation="horizontal"
+    :orientation="isMobile ? 'vertical' : 'horizontal'"
     arrow
     content-orientation="vertical"
     :items="items"
-    class="data-[orientation=horizontal]:border-b border-default data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48"
+    class="w-full md:w-auto"
+    :class="{
+      'border-b border-default': !isMobile,
+      'w-48': isMobile,
+    }"
   />
 </template>
