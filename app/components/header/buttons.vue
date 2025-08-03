@@ -35,7 +35,7 @@ const switchLanguage = (code: "uk" | "en") => {
         variant="ghost"
         size="sm"
         @click="switchLanguage(loc.code)"
-        :title="$t('ui.switch_language')"
+        :title="$t('header.ui.switch_language')"
       />
     </div>
   </div>

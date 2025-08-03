@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
-import { tr } from "@nuxt/ui/runtime/locale/index.js";
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 // Reactive orientation based on screen size
 const isMobile = ref(false);
@@ -19,7 +18,8 @@ onUnmounted(() => {
   window.removeEventListener("resize", updateOrientation);
 });
 
-const items = computed<NavigationMenuItem[][]>(() => [
+// Base items without locale prefix
+const baseItems: NavigationMenuItem[][] = [
   [
     {
       label: t("header.menu.home"),
@@ -32,19 +32,19 @@ const items = computed<NavigationMenuItem[][]>(() => [
       label: t("header.menu.about"),
       icon: "i-lucide-book-open",
       description: "About us",
-      to: "/",
+      to: "/about",
       children: [
         {
           label: t("header.menu.team"),
           icon: "i-lucide-users-round",
           description: "Our team",
-          to: "/",
+          to: "/terms",
         },
         {
           label: t("header.menu.partners"),
           icon: "i-lucide-handshake",
           description: "Our partners",
-          to: "/",
+          to: "/terms",
         },
         {
           label: t("header.menu.reporting"),
@@ -56,26 +56,26 @@ const items = computed<NavigationMenuItem[][]>(() => [
           label: t("header.menu.contacts"),
           icon: "i-lucide-contact",
           description: "Our contacts",
-          to: "/",
+          to: "/terms",
         },
       ],
     },
     {
       label: t("header.menu.news"),
       icon: "i-lucide-newspaper",
-      to: "/",
+      to: "/news",
       children: [],
     },
     {
       label: t("header.menu.resources"),
       icon: "i-lucide-box",
-      to: "/",
+      to: "/resources",
       children: [
         {
           label: t("header.menu.housing"),
           icon: "i-lucide-school",
           description: "Define shortcuts for your application.",
-          to: "/",
+          to: "/terms",
         },
         {
           label: t("header.menu.employment"),
@@ -86,12 +86,25 @@ const items = computed<NavigationMenuItem[][]>(() => [
           label: t("header.menu.support"),
           icon: "i-lucide-file-text",
           description: "Display a toast within your application.",
-          to: "/",
+          to: "/terms",
         },
       ],
     },
   ],
-]);
+];
+
+// Computed property to add locale prefix to links
+const items = computed<NavigationMenuItem[][]>(() => {
+  const prefix = locale.value === "en" ? "/en" : ""; // Add /en prefix for English, empty for default locale
+
+  const addPrefix = (item: NavigationMenuItem): NavigationMenuItem => ({
+    ...item,
+    to: item.to ? `${prefix}${item.to}` : undefined,
+    children: item.children?.map(addPrefix),
+  });
+
+  return baseItems.map((group) => group.map(addPrefix));
+});
 </script>
 
 <template>

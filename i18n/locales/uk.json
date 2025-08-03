@@ -26,9 +26,18 @@
       "volunteer": "Стати волонтером",
       "newsletter": "Підписатись",
       "collaboration": "Співпраця з нами"
+    },
+    "ui": {
+      "switch_language": "Змінити мову"
     }
   },
-  "ui": {
-    "switch_language": "Змінити мову"
+  "Footer": {
+    "address": "м. Авдіївка, вул. Молодіжна, 3А",
+    "terms": "Умови використання",
+    "socialMedia": "Наші соціальні мережі:",
+    "policy": "Політика конфіденційності",
+    "howToHelp": "Як допомогти",
+    "developer": "Розроблено IT-Starkon Web Studio",
+    "copyright": "© 2025. Всі права захищено."
   }
 }

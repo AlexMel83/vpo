@@ -26,9 +26,18 @@
       "volunteer": "Be a volunteer",
       "newsletter": "Subscribe",
       "collaboration": "Collaboration with us"
+    },
+    "ui": {
+      "switch_language": "Switch language"
     }
   },
-  "ui": {
-    "switch_language": "Switch language"
+  "Footer": {
+    "address": "Avdiivka city, Molodijna street, 3A",
+    "socialMedia": "Our social media:",
+    "terms": "Terms of use",
+    "policy": "Privacy policy",
+    "howToHelp": "How to help",
+    "developer": "Developed by IT-Starkon Web Studio",
+    "copyright": "© 2025. All rights reserved."
   }
 }

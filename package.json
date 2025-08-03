@@ -24,6 +24,8 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@iconify-json/fa-brands": "^1.2.1",
+    "@iconify-json/fa-solid": "^1.2.1",
     "@iconify-json/lucide": "^1.2.60"
   }
 }
