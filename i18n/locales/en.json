@@ -1,0 +1,12 @@
+{
+  "header": {
+    "enter": "Enter",
+    "title": "Council on IDPs",
+    "subtitle1": "at the Starokostyantyniv",
+    "subtitle2": "City Council",
+    "autorization_close": "Close authorization form"
+  },
+  "ui": {
+    "switch_language": "Switch language"
+  }
+}
