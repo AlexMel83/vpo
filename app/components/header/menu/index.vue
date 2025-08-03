@@ -1,126 +1,78 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
+const { t } = useI18n();
 
-const items = ref<NavigationMenuItem[][]>([
+const items = computed<NavigationMenuItem[][]>(() => [
   [
     {
-      label: "Guide",
+      label: t("header.menu.home"),
+      icon: "i-lucide-house",
+      description: "Home page",
+      // active: true,
+      children: [],
+    },
+    {
+      label: t("header.menu.about"),
       icon: "i-lucide-book-open",
+      description: "About us",
       children: [
         {
-          label: "Introduction",
-          description: "Fully styled and customizable components for Nuxt.",
-          icon: "i-lucide-house",
+          label: t("header.menu.team"),
+          icon: "i-lucide-users-round",
+          description: "Our team",
+          to: "/",
         },
         {
-          label: "Installation",
-          description:
-            "Learn how to install and configure Nuxt UI in your application.",
-          icon: "i-lucide-cloud-download",
+          label: t("header.menu.partners"),
+          icon: "i-lucide-handshake",
+          description: "Our partners",
+          to: "/",
         },
         {
-          label: "Icons",
-          icon: "i-lucide-smile",
-          description:
-            "You have nothing to do, @nuxt/icon will handle it automatically.",
+          label: t("header.menu.reporting"),
+          icon: "i-lucide-briefcase-business",
+          description: "Our reportings",
+          to: "/",
         },
         {
-          label: "Colors",
-          icon: "i-lucide-swatch-book",
-          description:
-            "Choose a primary and a neutral color from your Tailwind CSS theme.",
-        },
-        {
-          label: "Theme",
-          icon: "i-lucide-cog",
-          description:
-            "You can customize components by using the `class` / `ui` props or in your app.config.ts.",
+          label: t("header.menu.contacts"),
+          icon: "i-lucide-contact",
+          description: "Our contacts",
+          to: "/",
         },
       ],
     },
     {
-      label: "Composables",
-      icon: "i-lucide-database",
+      label: t("header.menu.news"),
+      icon: "i-lucide-newspaper",
+      to: "/",
+      children: [],
+    },
+    {
+      label: t("header.menu.resources"),
+      icon: "i-lucide-box",
+      to: "/",
+      // target: "_blank",
       children: [
         {
-          label: "defineShortcuts",
-          icon: "i-lucide-file-text",
+          label: t("header.menu.housing"),
+          icon: "i-lucide-school",
           description: "Define shortcuts for your application.",
           to: "/",
         },
         {
-          label: "useOverlay",
-          icon: "i-lucide-file-text",
+          label: t("header.menu.employment"),
+          icon: "i-lucide-pickaxe",
           description: "Display a modal/slideover within your application.",
           to: "/",
         },
         {
-          label: "useToast",
+          label: t("header.menu.support"),
           icon: "i-lucide-file-text",
           description: "Display a toast within your application.",
           to: "/",
         },
       ],
-    },
-    {
-      label: "Components",
-      icon: "i-lucide-box",
-      to: "/",
-      active: true,
-      defaultOpen: true,
-      children: [
-        {
-          label: "Link",
-          icon: "i-lucide-file-text",
-          description: "Use NuxtLink with superpowers.",
-          to: "/",
-        },
-        {
-          label: "Modal",
-          icon: "i-lucide-file-text",
-          description: "Display a modal within your application.",
-          to: "/",
-        },
-        {
-          label: "NavigationMenu",
-          icon: "i-lucide-file-text",
-          description: "Display a list of links.",
-          to: "/",
-        },
-        {
-          label: "Pagination",
-          icon: "i-lucide-file-text",
-          description: "Display a list of pages.",
-          to: "/",
-        },
-        {
-          label: "Popover",
-          icon: "i-lucide-file-text",
-          description:
-            "Display a non-modal dialog that floats around a trigger element.",
-          to: "/",
-        },
-        {
-          label: "Progress",
-          icon: "i-lucide-file-text",
-          description: "Show a horizontal bar to indicate task progression.",
-          to: "/",
-        },
-      ],
-    },
-  ],
-  [
-    {
-      label: "GitHub",
-      icon: "i-simple-icons-github",
-      badge: "3.8k",
-      to: "https://github.com/nuxt/ui",
-      target: "_blank",
-    },
-    {
-      label: "Help",
-      icon: "i-lucide-circle-help",
-      disabled: true,
     },
   ],
 ]);
@@ -129,8 +81,11 @@ const items = ref<NavigationMenuItem[][]>([
 <template>
   <UNavigationMenu
     highlight
+    color="primary"
     highlight-color="primary"
     orientation="horizontal"
+    arrow
+    content-orientation="vertical"
     :items="items"
     class="data-[orientation=horizontal]:border-b border-default data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48"
   />

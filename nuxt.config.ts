@@ -1,6 +1,6 @@
 // nuxt.config.ts
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
@@ -17,7 +17,6 @@ export default defineNuxtConfig({
       { code: "uk", iso: "uk-UA", name: "Українська", file: "uk.json" },
       { code: "en", iso: "en-US", name: "English", file: "en.json" },
     ],
-
     strategy: "prefix_except_default",
     detectBrowserLanguage: {
       useCookie: true,
