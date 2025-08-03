@@ -18,84 +18,9 @@ onUnmounted(() => {
   window.removeEventListener("resize", updateOrientation);
 });
 
-// Base items without locale prefix
-const baseItems: NavigationMenuItem[][] = [
-  [
-    {
-      label: t("header.menu.home"),
-      icon: "i-lucide-house",
-      description: "Home page",
-      children: [],
-      to: "/",
-    },
-    {
-      label: t("header.menu.about"),
-      icon: "i-lucide-book-open",
-      description: "About us",
-      to: "/about",
-      children: [
-        {
-          label: t("header.menu.team"),
-          icon: "i-lucide-users-round",
-          description: "Our team",
-          to: "/terms",
-        },
-        {
-          label: t("header.menu.partners"),
-          icon: "i-lucide-handshake",
-          description: "Our partners",
-          to: "/terms",
-        },
-        {
-          label: t("header.menu.reporting"),
-          icon: "i-lucide-briefcase-business",
-          description: "Our reportings",
-          to: "/",
-        },
-        {
-          label: t("header.menu.contacts"),
-          icon: "i-lucide-contact",
-          description: "Our contacts",
-          to: "/terms",
-        },
-      ],
-    },
-    {
-      label: t("header.menu.news"),
-      icon: "i-lucide-newspaper",
-      to: "/news",
-      children: [],
-    },
-    {
-      label: t("header.menu.resources"),
-      icon: "i-lucide-box",
-      to: "/resources",
-      children: [
-        {
-          label: t("header.menu.housing"),
-          icon: "i-lucide-school",
-          description: "Define shortcuts for your application.",
-          to: "/terms",
-        },
-        {
-          label: t("header.menu.employment"),
-          icon: "i-lucide-pickaxe",
-          to: "/",
-        },
-        {
-          label: t("header.menu.support"),
-          icon: "i-lucide-file-text",
-          description: "Display a toast within your application.",
-          to: "/terms",
-        },
-      ],
-    },
-  ],
-];
-
-// Computed property to add locale prefix to links
+// Computed property for menu items with dynamic translations and locale prefix
 const items = computed<NavigationMenuItem[][]>(() => {
-  const prefix = locale.value === "en" ? "/en" : ""; // Add /en prefix for English, empty for default locale
+  const prefix = locale.value === "en" ? "/en" : ""; // Add /en prefix for English
 
   const addPrefix = (item: NavigationMenuItem): NavigationMenuItem => ({
     ...item,
@@ -103,7 +28,79 @@ const items = computed<NavigationMenuItem[][]>(() => {
     children: item.children?.map(addPrefix),
   });
 
-  return baseItems.map((group) => group.map(addPrefix));
+  return [
+    [
+      {
+        label: t("header.menu.home"),
+        icon: "i-lucide-house",
+        description: t("header.menu.home"),
+        children: [],
+        to: "/",
+      },
+      {
+        label: t("header.menu.about"),
+        icon: "i-lucide-book-open",
+        description: t("header.menu.about"),
+        to: "/about",
+        children: [
+          {
+            label: t("header.menu.team"),
+            icon: "i-lucide-users-round",
+            description: t("header.menu.team"),
+            to: "/terms",
+          },
+          {
+            label: t("header.menu.partners"),
+            icon: "i-lucide-handshake",
+            description: t("header.menu.partners"),
+            to: "/terms",
+          },
+          {
+            label: t("header.menu.reporting"),
+            icon: "i-lucide-briefcase-business",
+            description: t("header.menu.reporting"),
+            to: "/",
+          },
+          {
+            label: t("header.menu.contacts"),
+            icon: "i-lucide-contact",
+            description: t("header.menu.contacts"),
+            to: "/terms",
+          },
+        ],
+      },
+      {
+        label: t("header.menu.news"),
+        icon: "i-lucide-newspaper",
+        to: "/news",
+        children: [],
+      },
+      {
+        label: t("header.menu.resources"),
+        icon: "i-lucide-box",
+        to: "/resources",
+        children: [
+          {
+            label: t("header.menu.housing"),
+            icon: "i-lucide-school",
+            description: t("header.menu.housing"),
+            to: "/terms",
+          },
+          {
+            label: t("header.menu.employment"),
+            icon: "i-lucide-pickaxe",
+            to: "/",
+          },
+          {
+            label: t("header.menu.support"),
+            icon: "i-lucide-file-text",
+            description: t("header.menu.support"),
+            to: "/terms",
+          },
+        ],
+      },
+    ],
+  ].map((group) => group.map(addPrefix));
 });
 </script>
 
